@@ -1,0 +1,238 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">import React, { useState } from 'react';</p>
+<p class="p1">import { Heart, Sparkles, Star, CheckCircle } from 'lucide-react';</p>
+<p class="p2"><br></p>
+<p class="p1">const App = () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const [currentQuestion, setCurrentQuestion] = useState(0);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const [showResult, setShowResult] = useState(false);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>// 所有题目都巧妙引导到马宁</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const questions = [</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{</p>
+<p class="p1"><span class="Apple-converted-space">      </span>text: "今天心情如何呀？",</p>
+<p class="p1"><span class="Apple-converted-space">      </span>options: [</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{ text: "开心得像小兔子蹦蹦跳！", next: 1 },</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{ text: "有点小忧郁，需要抱抱", next: 1 },</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{ text: "平静如水，随缘就好", next: 1 },</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{ text: "充满期待，想知道答案！", next: 1 }</p>
+<p class="p1"><span class="Apple-converted-space">      </span>]</p>
+<p class="p1"><span class="Apple-converted-space">    </span>},</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{</p>
+<p class="p1"><span class="Apple-converted-space">      </span>text: "最喜欢什么颜色？",</p>
+<p class="p1"><span class="Apple-converted-space">      </span>options: [</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{ text: "粉色！可爱又温暖", next: 2 },</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{ text: "蓝色，像天空一样纯净", next: 2 },</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{ text: "紫色，神秘又浪漫", next: 2 },</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{ text: "白色，简单又干净", next: 2 }</p>
+<p class="p1"><span class="Apple-converted-space">      </span>]</p>
+<p class="p1"><span class="Apple-converted-space">    </span>},</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{</p>
+<p class="p1"><span class="Apple-converted-space">      </span>text: "周末想做什么？",</p>
+<p class="p1"><span class="Apple-converted-space">      </span>options: [</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{ text: "和好朋友一起喝奶茶聊天", next: 3 },</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{ text: "宅在家里看动漫", next: 3 },</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{ text: "去公园散步晒太阳", next: 3 },</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{ text: "学习新知识充实自己", next: 3 }</p>
+<p class="p1"><span class="Apple-converted-space">      </span>]</p>
+<p class="p1"><span class="Apple-converted-space">    </span>},</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{</p>
+<p class="p1"><span class="Apple-converted-space">      </span>text: "最喜欢的chiikawa角色是？",</p>
+<p class="p1"><span class="Apple-converted-space">      </span>options: [</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{ text: "小可爱chiikawa！", next: 4 },</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{ text: "勇敢的兔兔！", next: 4 },</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{ text: "温柔的乌萨奇！", next: 4 },</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{ text: "都很喜欢！", next: 4 }</p>
+<p class="p1"><span class="Apple-converted-space">      </span>]</p>
+<p class="p1"><span class="Apple-converted-space">    </span>},</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{</p>
+<p class="p1"><span class="Apple-converted-space">      </span>text: "觉得什么样的人最吸引你？",</p>
+<p class="p1"><span class="Apple-converted-space">      </span>options: [</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{ text: "温柔体贴，总是为别人着想", next: 5 },</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{ text: "幽默风趣，能带来快乐", next: 5 },</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{ text: "聪明睿智，有深度", next: 5 },</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{ text: "真诚善良，值得信赖", next: 5 }</p>
+<p class="p1"><span class="Apple-converted-space">      </span>]</p>
+<p class="p1"><span class="Apple-converted-space">    </span>},</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{</p>
+<p class="p1"><span class="Apple-converted-space">      </span>text: "最后一个问题：你相信缘分吗？",</p>
+<p class="p1"><span class="Apple-converted-space">      </span>options: [</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{ text: "相信！一切都是最好的安排", next: 'result' },</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{ text: "有点相信，但也要努力", next: 'result' },</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{ text: "不太相信，靠自己最重要", next: 'result' },</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{ text: "随缘吧，顺其自然", next: 'result' }</p>
+<p class="p1"><span class="Apple-converted-space">      </span>]</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const handleAnswer = (next) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if (next === 'result') {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>setShowResult(true);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>setCurrentQuestion(next);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const resetQuiz = () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>setCurrentQuestion(0);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>setShowResult(false);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div className="min-h-screen bg-gradient-to-br from-pink-100 via-purple-50 to-rose-100 p-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{!showResult ? (</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div className="max-w-2xl mx-auto"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>{/* 专属标题 */}</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div className="text-center mb-8 mt-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div className="bg-white/80 backdrop-blur-sm rounded-3xl p-6 border-2 border-pink-200 shadow-lg"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;h1 className="text-3xl md:text-4xl font-bold text-pink-600 mb-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>💌 专属测试 💖</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;p className="text-xl text-purple-700 font-semibold"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>为 &lt;span className="text-pink-600 underline"&gt;爱新觉罗博涛&lt;/span&gt; 量身定制</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div className="flex justify-center mt-4 space-x-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;Heart className="text-pink-500 animate-pulse" size={24} /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;Sparkles className="text-purple-500" size={24} /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;Star className="text-rose-500" size={24} /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>{/* chiikawa装饰 */}</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div className="flex justify-center mb-6 space-x-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div className="bg-white rounded-full p-2 shadow-md"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div className="w-8 h-8 bg-pink-200 rounded-full flex items-center justify-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span className="text-xs"&gt;🐰&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div className="bg-white rounded-full p-2 shadow-md"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div className="w-8 h-8 bg-purple-200 rounded-full flex items-center justify-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span className="text-xs"&gt;🐭&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div className="bg-white rounded-full p-2 shadow-md"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div className="w-8 h-8 bg-rose-200 rounded-full flex items-center justify-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span className="text-xs"&gt;🐹&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>{/* 问题卡片 */}</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div className="bg-white/90 backdrop-blur-sm rounded-3xl p-6 border-2 border-pink-200 shadow-xl"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div className="text-center mb-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div className="inline-block bg-pink-100 rounded-full px-4 py-1 mb-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span className="text-pink-700 font-medium"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>问题 {currentQuestion + 1} / {questions.length}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;h2 className="text-2xl font-bold text-purple-800 mb-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{questions[currentQuestion].text}</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div className="w-16 h-1 bg-pink-300 rounded-full mx-auto"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div className="space-y-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>{questions[currentQuestion].options.map((option, index) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;button</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>key={index}</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>onClick={() =&gt; handleAnswer(option.next)}</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>className="w-full p-4 bg-gradient-to-r from-pink-50 to-purple-50 rounded-2xl border-2 border-pink-200 hover:border-pink-400 hover:shadow-lg transition-all duration-300 text-left group"</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;div className="flex items-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div className="w-8 h-8 bg-pink-200 rounded-full flex items-center justify-center mr-3 group-hover:bg-pink-300 transition-colors"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>&lt;span className="text-pink-700 font-bold"&gt;{index + 1}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span className="text-purple-700 font-medium group-hover:text-pink-600 transition-colors"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>{option.text}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>))}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>{/* 进度条 */}</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div className="mt-6 bg-white/70 rounded-full h-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">              </span>className="bg-gradient-to-r from-pink-400 to-purple-400 h-2 rounded-full transition-all duration-500"</p>
+<p class="p1"><span class="Apple-converted-space">              </span>style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>) : (</p>
+<p class="p1"><span class="Apple-converted-space">        </span>// 结果页面</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div className="max-w-2xl mx-auto"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div className="text-center mb-8 mt-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div className="bg-white/80 backdrop-blur-sm rounded-3xl p-6 border-2 border-pink-200 shadow-lg"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;h1 className="text-3xl md:text-4xl font-bold text-pink-600 mb-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>🎉 测试完成！ 🎉</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;p className="text-xl text-purple-700 font-semibold"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>为 &lt;span className="text-pink-600 underline"&gt;爱新觉罗博涛&lt;/span&gt; 的专属结果</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 border-2 border-pink-200 shadow-xl text-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div className="mb-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;CheckCircle className="text-green-500 mx-auto mb-4" size={64} /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;h2 className="text-4xl font-bold text-pink-600 mb-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>❤️ 马宁 ❤️</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;p className="text-lg text-purple-700 mb-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>无论你如何选择，答案都是——</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div className="text-2xl font-bold text-purple-800 bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>马宁就是你最喜欢的人！</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div className="bg-pink-50 rounded-2xl p-6 mb-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;p className="text-purple-700 text-lg"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>❤️ 缘分天注定，真心永不变 ❤️</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button</p>
+<p class="p1"><span class="Apple-converted-space">              </span>onClick={resetQuiz}</p>
+<p class="p1"><span class="Apple-converted-space">              </span>className="bg-gradient-to-r from-pink-400 to-purple-400 text-white font-bold py-3 px-8 rounded-full hover:from-pink-500 hover:to-purple-500 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>再测一次 💖</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>{/* chiikawa庆祝装饰 */}</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div className="flex justify-center mt-8 space-x-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div className="text-4xl animate-bounce"&gt;🐰&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div className="text-4xl animate-bounce" style={{ animationDelay: '0.2s' }}&gt;💕&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div className="text-4xl animate-bounce" style={{ animationDelay: '0.4s' }}&gt;🐹&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div className="text-4xl animate-bounce" style={{ animationDelay: '0.6s' }}&gt;✨&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div className="text-4xl animate-bounce" style={{ animationDelay: '0.8s' }}&gt;🐭&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>)}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>{/* 底部装饰 */}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div className="fixed bottom-4 left-4 text-pink-300 opacity-60"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div className="text-xs"&gt;💕 专属于爱新觉罗博涛 💕&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>);</p>
+<p class="p1">};</p>
+<p class="p2"><br></p>
+<p class="p1">export default App;</p>
+</body>
+</html>
